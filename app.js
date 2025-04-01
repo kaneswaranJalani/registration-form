@@ -56,11 +56,11 @@ document.getElementById('password').addEventListener('input', function () {
     strengthMeter.className = 'strength-meter';
 
     if (password.length < 8) {
-        strengthMeter.classList.add('weak');
+        strengthMeter.style.backgroundColor = "red";
     } else if (/(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])/.test(password)) {
-        strengthMeter.classList.add('strong');
+        strengthMeter.style.backgroundColor = "yellow";
     } else {
-        strengthMeter.classList.add('medium');
+        strengthMeter.style.backgroundColor = "green";
     }
 });
 
