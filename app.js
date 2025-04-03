@@ -8,6 +8,9 @@ document.getElementById("registrationform").addEventListener("submit", function 
     let password = document.getElementById("password").value;
     let confirmpassword = document.getElementById("confirmpassword").value;
     let message = document.getElementById("message");
+    let strengthBar = document.getElementById('strengthBar');
+    let passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+
 
     // Check if all fields are filled
     if (!name || !age || !gender || !email || !password || !confirmpassword) {
@@ -50,19 +53,27 @@ document.getElementById("registrationform").addEventListener("submit", function 
 });
 
 // Password Strength Indicator
-document.getElementById('password').addEventListener('input', function () {
-    let strengthMeter = document.getElementById('strengthMeter');
-    let password = this.value;
-    strengthMeter.className = 'strength-meter';
 
-    if (password.length < 8) {
-        strengthMeter.style.backgroundColor = "red";
-    } else if (/(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])/.test(password)) {
-        strengthMeter.style.backgroundColor = "yellow";
+document.getElementById('password').addEventListener('input',function() {
+
+    const value = password.value;
+    let strength = 0;
+
+    if (value.length >= 8) strength += 25;
+    if (/[A-Z]/.test(value)) strength += 25;
+    if (/[0-9]/.test(value)) strength += 25;
+    if (/[!@#$%^&*]/.test(value)) strength += 25;
+
+    strengthBar.style.width = `${Math.min(strength, 100)}%`;
+    if (strength < 30) {
+        strengthBar.style.background = 'red'; 
+    } else if (strength < 70) {
+        strengthBar.style.background = 'orange';
     } else {
-        strengthMeter.style.backgroundColor = "green";
+        strengthBar.style.background = 'green';
     }
-});
+
+})
 
 // Toggle Password Visibility
 function togglePassword(fieldId) {

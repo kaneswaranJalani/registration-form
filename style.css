@@ -34,3 +34,21 @@ button{
     color:rgb(95, 176, 14);
     font-weight: bold;
 }
+
+.toggle-password:hover {
+    cursor: pointer;
+}
+
+.strength-meter {
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease, background 0.3s ease;
+}
